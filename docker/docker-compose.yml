@@ -2,12 +2,10 @@ version: '3.0'
 
 services:
   app:
-    container_name: ${PROJECT_NAME}-app
+    container_name: app
     build:
       context: ../
-      dockerfile: docker/bot/Dockerfile
+      dockerfile: docker/Dockerfile
     volumes:
       - ${FILES_PATH}:/files
       - ${RESULTS_PATH}:/result
-    depends_on:
-      - postgres

@@ -1,6 +1,6 @@
 package pw.mlnkv
 
-import pw.mlnkv.Scanner.Scanner
+import pw.mlnkv.scanner.Scanner
 
 fun main() {
     // Засекаем время начала работы программы в миллисекундах

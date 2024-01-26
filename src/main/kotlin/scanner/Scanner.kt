@@ -1,4 +1,4 @@
-package pw.mlnkv.Scanner
+package pw.mlnkv.scanner
 
 import java.io.File
 

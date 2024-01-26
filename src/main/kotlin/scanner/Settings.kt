@@ -1,4 +1,4 @@
-package pw.mlnkv.Scanner
+package pw.mlnkv.scanner
 
 object Settings {
     const val FILES_PATH = "D:\\Projects\\kotlin\\find-urls-in-files"

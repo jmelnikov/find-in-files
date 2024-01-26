@@ -7,15 +7,12 @@ class Scanner {
     private val resultPath = Settings.RESULT_PATH
 
     init {
-        println("Scanner initialized")
-
         if(!File(resultPath).exists()) {
             File(resultPath).mkdir()
         }
     }
 
     fun run() {
-        println("Scanner started")
         File(filesPath).walk().forEach {
             println("File: $it")
         }

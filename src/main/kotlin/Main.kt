@@ -1,9 +1,14 @@
 package pw.mlnkv
 
+import pw.mlnkv.Scanner.Scanner
+
 fun main() {
     // Засекаем время начала работы программы в миллисекундах
     val startTime = System.currentTimeMillis()
-    println("Hello World!")
+
+    // Запускаем программу
+    Scanner().run()
+
     // Засекаем время окончания работы программы в миллисекундах
     val endTime = System.currentTimeMillis()
 

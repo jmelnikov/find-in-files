@@ -18,5 +18,5 @@ fun main() {
     val milliseconds = if((endTime - startTime) % 1000 < 10) "00${(endTime - startTime) % 1000}" else if((endTime - startTime) % 1000 < 100) "0${(endTime - startTime) % 1000}" else "${(endTime - startTime) % 1000}"
 
     // Выводим время работы программы
-    println("Время работы программы: $minutes:$seconds.$milliseconds")
+    println("Total execution time: $minutes:$seconds.$milliseconds")
 }

@@ -1,13 +1,14 @@
 package pw.mlnkv.scanner
 
 object Settings {
-    const val FILES_PATH = "D:\\Projects\\kotlin\\find-urls-in-files"
-    const val RESULT_PATH = "D:\\Projects\\kotlin\\find-urls-in-files\\docker\\result"
+    const val FILES_PATH = "/files"
+    const val RESULT_PATH = "/result"
 
     val EXCLUDED_PATHS = listOf(
         ".idea",
         ".git",
-        "vendor"
+        "vendor",
+        "docker"
     )
 
     val EXCLUDED_FILES = listOf(

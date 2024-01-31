@@ -8,11 +8,14 @@ object Settings {
         ".idea",
         ".git",
         "vendor",
-        "docker"
+        "docker",
+        "data_mysql"
     )
 
     val EXCLUDED_FILES = listOf(
         ".env",
+        ".env.dist",
+        ".env.local",
     )
 
     val EXCLUDED_EXTENSION = listOf(
@@ -31,10 +34,74 @@ object Settings {
         "lock",
         "xml",
         "css",
-        "scss"
+        "scss",
+        "sass",
+        "less",
+        "doc",
+        "docx",
+        "pdf",
+        "xls",
+        "xlsx",
+        "ppt",
+        "pptx",
+        "odt",
+        "ods",
+        "odp",
+        "odg",
+        "odf",
+        "txt",
+        "csv",
+        "ts",
+        "tsx",
+        "json",
+        "yml",
+        "yaml",
+        "log",
+        "sql",
+        "sqlite",
+        "sqlite3",
+        "db",
+        "sqlite-journal",
+        "sqlite-shm",
+        "sqlite-wal",
+        "zip",
+        "rar",
+        "tar",
+        "gz",
+        "7z",
+        "exe",
+        "dll",
+        "pkg",
+        "jar",
+        "war",
+        "java",
+        "class",
+        "py",
+        "pyc",
+        "pyo",
+        "pyd",
+        "so",
+        "dat",
+        "bin",
+        "dmg",
+        "iso",
+        "img",
+        "apk",
+        "data",
+        "ttf",
+        "ser",
+        "sh",
+        "rels",
+        "md",
+        "map",
+        "lock",
+        "min.js",
     )
 
-    val EXCLUDED_PATH_REGEX = listOf(
-        Regex(".*min\\.js$"),
+    val EXCLUDED_LINES_REGEX = listOf(
+        Regex("//.*"), // Single line comment
+        Regex("#.*"), // Single line comment
+        Regex("/.\\*.*"), // Multi line comment
+        Regex("\\*.*") // Multi line comment
     )
 }

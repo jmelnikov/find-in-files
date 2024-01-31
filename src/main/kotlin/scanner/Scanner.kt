@@ -18,7 +18,7 @@ class Scanner {
             // Increase files counter
             filesCounter++
 
-            if(isExcluded(it.path) || it.isDirectory) {
+            if(isExcludedFile(it.path) || it.isDirectory) {
                 return@forEach
             }
 
@@ -28,6 +28,9 @@ class Scanner {
                 linesCounter++
 
                 if(Regex(".*https?://.*").matches(line)) {
+                    if(isExcludedLine(line.trim())) {
+                        return@forEach
+                    }
                     // Print line with URL
                     println("File #$filesCounter/$totalFiles line #${linesCounter}: ${line.trim()}")
 
@@ -43,7 +46,7 @@ class Scanner {
         println()
     }
 
-    private fun isExcluded(path: String): Boolean {
+    private fun isExcludedFile(path: String): Boolean {
         val filesPath = Settings.FILES_PATH.replace("\\", "/")
 
         // Check if path is excluded
@@ -61,11 +64,13 @@ class Scanner {
             Regex("^$filesPath/(.*)\\.$it$").matches(path)
         }
 
-        // Check if file path matches excluded regex
-        val excludedRegex = Settings.EXCLUDED_PATH_REGEX.any() {
-            it.matches(path)
-        }
+        return (excludedPath || excludedFile || excludedExtension)
+    }
 
-        return (excludedPath || excludedFile || excludedExtension || excludedRegex)
+    private fun isExcludedLine(line: String): Boolean {
+        // Check if line matches excluded regex
+        return Settings.EXCLUDED_LINES_REGEX.any() {
+            it.matches(line)
+        }
     }
 }

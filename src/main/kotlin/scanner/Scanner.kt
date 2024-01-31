@@ -64,7 +64,12 @@ class Scanner {
             Regex("^$filesPath/(.*)\\.$it$").matches(path)
         }
 
-        return (excludedPath || excludedFile || excludedExtension)
+        // Check if file path matches excluded regex
+        val excludedRegex = Settings.EXCLUDED_PATH_REGEX.any() {
+            it.matches(path)
+        }
+
+        return (excludedPath || excludedFile || excludedExtension || excludedRegex)
     }
 
     private fun isExcludedLine(line: String): Boolean {

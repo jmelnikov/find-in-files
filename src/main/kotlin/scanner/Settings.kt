@@ -98,6 +98,10 @@ object Settings {
         "min.js",
     )
 
+    val EXCLUDED_PATH_REGEX = listOf(
+        Regex(".*index-[a-zA-Z0-9]+\\.js$"),
+    )
+
     val EXCLUDED_LINES_REGEX = listOf(
         Regex("//.*"), // Single line comment
         Regex("#.*"), // Single line comment

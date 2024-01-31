@@ -8,11 +8,14 @@ class Scanner {
     private val resultWriter = ResultWriter()
 
     fun run() {
+        println("Start scanning...")
+        println("Walking filepath directory and counting files...")
+
         val files = File(filesPath).walk()
         val totalFiles = files.count()
         var filesCounter = 0
 
-        println("Scanning $totalFiles files...")
+        println("Searching URLs in $totalFiles files...")
 
         files.forEach {
             // Increase files counter
@@ -31,8 +34,8 @@ class Scanner {
                     if(isExcludedLine(line.trim())) {
                         return@forEach
                     }
-                    // Print line with URL
-                    println("File #$filesCounter/$totalFiles line #${linesCounter}: ${line.trim()}")
+
+                    println("Found URL in ${it.path} ($filesCounter/$totalFiles)")
 
                     resultWriter.addLine(it.path, linesCounter, line.trim())
                 }
@@ -41,9 +44,6 @@ class Scanner {
 
         // Generate report
         resultWriter.generateReport()
-
-        // Print empty line
-        println()
     }
 
     private fun isExcludedFile(path: String): Boolean {

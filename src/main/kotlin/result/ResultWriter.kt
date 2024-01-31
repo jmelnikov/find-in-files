@@ -29,9 +29,9 @@ class ResultWriter {
             .replace("\\", "#")
             .replace("/", "#")
         val preparedLine = line
+            .replace("&", "&amp;")
             .replace("<", "&lt;")
             .replace(">", "&gt;")
-            .replace("&", "&amp;")
 
         if (!File("$resultPath/temp/$tempFilename").exists()) {
             File("$resultPath/temp/$tempFilename").writeText("")
@@ -42,12 +42,17 @@ class ResultWriter {
 
     fun generateReport() {
         val tempFiles = File("$resultPath/temp").listFiles() ?: return
+        println("Total files with URLs found: ${tempFiles.count()}")
+        println("Generating report...")
 
+        // Generate result file
         val header = this.javaClass.getResource("/result/header.html")?.readText()
             ?.replace("{{filesPath}}", Settings.FILES_PATH).toString()
 
+        // Write header to result file
         resultFile.appendText("$header\n")
 
+        // Blocks
         tempFiles.forEach { tempFile ->
             val filename = tempFile.name
                 .replace("#", "/")
@@ -63,14 +68,17 @@ class ResultWriter {
             ?.replace("{{date}}", SimpleDateFormat("dd.MM.yyyy").format(System.currentTimeMillis()))
             ?.replace("{{time}}", SimpleDateFormat("HH:mm").format(System.currentTimeMillis())).toString()
 
+        // Write footer to result file
         resultFile.appendText("$footer\n")
 
         // Clear temp directory
+        println("Clearing temp directory...")
         tempFiles.forEach { tempFile ->
             tempFile.delete()
         }
 
         // Delete temp directory
+        println("Deleting temp directory...")
         File("$resultPath/temp").delete()
     }
 }

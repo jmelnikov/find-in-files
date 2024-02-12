@@ -15,7 +15,7 @@
 Там же, в директории `<project_path>/docker` выполнить команду:
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 ## Дополнительные настройки

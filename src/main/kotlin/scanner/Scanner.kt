@@ -17,22 +17,22 @@ class Scanner {
 
         println("Searching URLs in $totalFiles files...")
 
-        files.forEach {
+        files.forEach files@ {
             // Increase files counter
             filesCounter++
 
             if(isExcludedFile(it.path) || it.isDirectory) {
-                return@forEach
+                return@files
             }
 
             var linesCounter = 0
-            it.readLines().forEach { line ->
+            it.readLines().forEach lines@ { line ->
                 // Increase lines counter
                 linesCounter++
 
                 if(Regex(".*https?://.*").matches(line)) {
                     if(isExcludedLine(line.trim())) {
-                        return@forEach
+                        return@lines
                     }
 
                     println("Found URL in ${it.path} ($filesCounter/$totalFiles)")
@@ -50,22 +50,22 @@ class Scanner {
         val filesPath = Settings.FILES_PATH.replace("\\", "/")
 
         // Check if path is excluded
-        val excludedPath = Settings.EXCLUDED_PATHS.any() {
+        val excludedPath = Settings.EXCLUDED_PATHS.any {
             Regex("^$filesPath/$it(/.*)?$").matches(path)
         }
 
         // Check if file is excluded
-        val excludedFile = Settings.EXCLUDED_FILES.any() {
+        val excludedFile = Settings.EXCLUDED_FILES.any {
             Regex("^$filesPath/$it$").matches(path)
         }
 
         // Check if file extension is excluded
-        val excludedExtension = Settings.EXCLUDED_EXTENSION.any() {
+        val excludedExtension = Settings.EXCLUDED_EXTENSION.any {
             Regex("^$filesPath/(.*)\\.$it$").matches(path)
         }
 
         // Check if file path matches excluded regex
-        val excludedRegex = Settings.EXCLUDED_PATH_REGEX.any() {
+        val excludedRegex = Settings.EXCLUDED_PATH_REGEX.any {
             it.matches(path)
         }
 
@@ -74,7 +74,7 @@ class Scanner {
 
     private fun isExcludedLine(line: String): Boolean {
         // Check if line matches excluded regex
-        return Settings.EXCLUDED_LINES_REGEX.any() {
+        return Settings.EXCLUDED_LINES_REGEX.any {
             it.matches(line)
         }
     }
